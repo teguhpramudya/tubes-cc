@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+.dockerignore
+.vscode/
+.idea/
+*.log
+*.tmp
