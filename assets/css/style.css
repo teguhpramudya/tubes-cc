@@ -187,3 +187,62 @@ footer {
   color: white;
   font-size: 0.9em;
 }
+
+.pesan {
+  padding: 80px 10%;
+  background: #f5eee6;
+  text-align: center;
+}
+
+.pesan h2 {
+  font-size: 40px;
+  color: #4b2e2e;
+  margin-bottom: 10px;
+}
+
+.pesan p {
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.form-pesan {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-pesan input,
+.form-pesan select,
+.form-pesan textarea {
+  padding: 14px;
+  border: 1px solid #b08968;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.form-pesan textarea {
+  height: 120px;
+}
+
+.form-pesan button {
+  background: #5c3d2e;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-pesan button:hover {
+  background: #3d2a1f;
+}
+
+.produk-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}

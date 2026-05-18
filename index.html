@@ -6,45 +6,165 @@
     <title>Katalog Kopi Arabika - Tubes Cloud</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <a href="#home">Home</a>
         <a href="#produk">Produk</a>
         <a href="#tentang">Tentang Kami</a>
+        <a href="#pesan">Pesan</a>
     </nav>
 
+    <!-- Hero Section -->
     <header id="home" class="hero">
         <div class="hero-overlay">
             <div class="hero-content">
                 <h1>Kopi Arabika</h1>
-                <p>Nikmati keajaiban aroma biji kopi Arabika premium langsung dari pegunungan Aceh Gayo dan Kerinci.</p>
-                <a href="#produk" class="cta-btn">Lihat Produk</a>
+                <p>
+                    Nikmati keajaiban aroma biji kopi Arabika premium
+                    langsung dari pegunungan Aceh Gayo dan Kerinci.
+                </p>
+
+                <a href="#produk" class="cta-btn">
+                    Lihat Produk
+                </a>
             </div>
         </div>
     </header>
 
+    <!-- Produk -->
     <section id="produk" class="container">
+
         <h2>Katalog Produk</h2>
-        <div class="card">
-            <img src="assets/img/kopi-gayo.jpg" alt="Biji Kopi Arabika">
+
+        <div class="produk-list">
+
+            <!-- Produk 1 -->
+            <div class="card">
+                <img src="assets/img/kopi-gayo.jpg" alt="Arabika Gayo">
+
                 <div class="card-body">
-                    <h3>Arabika Premium</h3>
-                    <p>Biji kopi pilihan dengan proses roasting sempurna...</p>
-                    <p class="price">Rp 230.000/Kg</p> </div>
+                    <h3>Arabika Gayo</h3>
+
+                    <p>
+                        Biji kopi premium dari Aceh Gayo dengan aroma khas dan rasa lembut.
+                    </p>
+
+                    <p class="price">
+                        Rp 230.000/Kg
+                    </p>
+                </div>
             </div>
+
+            <!-- Produk 2 -->
+            <div class="card">
+                <img src="assets/img/kopi-kerinci.jpg" alt="Arabika Kerinci">
+
+                <div class="card-body">
+                    <h3>Arabika Kerinci</h3>
+
+                    <p>
+                        Memiliki karakter fruity dengan tingkat acidity seimbang.
+                    </p>
+
+                    <p class="price">
+                        Rp 250.000/Kg
+                    </p>
+                </div>
+            </div>
+
+            <!-- Produk 3 -->
+            <div class="card">
+                <img src="assets/img/kopi-robusta.jpg" alt="Arabika Toraja">
+
+                <div class="card-body">
+                    <h3>Arabika Toraja</h3>
+
+                    <p>
+                        Aroma kuat dengan rasa bold khas kopi pegunungan Toraja.
+                    </p>
+
+                    <p class="price">
+                        Rp 240.000/Kg
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
 
+    <!-- Tentang -->
     <section id="tentang" class="container">
+
         <div class="tentang">
             <h2>Tentang Kami</h2>
-            <p>Kami berdedikasi untuk menghadirkan biji kopi kualitas terbaik dari petani lokal Indonesia ke cangkir Anda. Proyek ini dideploy menggunakan teknologi Cloud AWS dan Docker sebagai bagian dari tugas besar Komputasi Awan.</p>
+
+            <p>
+                Kami berdedikasi untuk menghadirkan biji kopi kualitas terbaik
+                dari petani lokal Indonesia ke cangkir Anda.
+                Proyek ini dideploy menggunakan teknologi Cloud AWS dan Docker
+                sebagai bagian dari tugas besar Komputasi Awan.
+            </p>
         </div>
+
     </section>
 
+    <!-- Form Pemesanan -->
+    <section id="pesan" class="pesan">
+
+        <h2>Form Pemesanan</h2>
+
+        <p>
+            Isi form berikut untuk memesan kopi favoritmu.
+        </p>
+
+        <form class="form-pesan">
+
+            <input
+                type="text"
+                placeholder="Nama Lengkap"
+                required
+            >
+
+            <input
+                type="text"
+                placeholder="Nomor WhatsApp"
+                required
+            >
+
+            <select required>
+                <option value="">Pilih Produk Kopi</option>
+                <option>Arabika Gayo</option>
+                <option>Arabika Kerinci</option>
+                <option>Arabika Toraja</option>
+            </select>
+
+            <input
+                type="number"
+                placeholder="Jumlah Pesanan"
+                required
+            >
+
+            <textarea
+                placeholder="Alamat Pengiriman"
+            ></textarea>
+
+            <button type="submit">
+                Pesan Sekarang
+            </button>
+
+        </form>
+
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Katalog Biji Kopi Digital | Tugas Besar Komputasi Awan - Telkom University</p>
+        <p>
+            &copy; 2026 Katalog Biji Kopi Digital |
+            Tugas Besar Komputasi Awan - Telkom University
+        </p>
     </footer>
 
 </body>
