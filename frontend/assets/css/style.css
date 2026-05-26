@@ -490,3 +490,379 @@ footer {
     padding: 22px;
   }
 }
+
+/* =====================================================
+   Responsive Fix Final - User Page & Admin Page
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Navbar dibuat fleksibel agar menu tidak berantakan di mobile */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.navbar a {
+  margin: 0;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+/* Tombol dibuat konsisten */
+button,
+.cta-btn,
+.admin-btn,
+.form-pesan button {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 3em;
+  }
+
+  .hero-content p {
+    font-size: 1.05em;
+  }
+
+  .produk-list {
+    gap: 24px;
+  }
+
+  .card {
+    max-width: 340px;
+  }
+
+  .admin-container {
+    padding: 35px 18px;
+  }
+}
+
+/* Mobile umum */
+@media (max-width: 768px) {
+  .navbar {
+    gap: 8px;
+    padding: 12px 10px;
+  }
+
+  .navbar a {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .hero {
+    height: auto;
+    min-height: 78vh;
+    padding: 80px 18px;
+  }
+
+  .hero-content {
+    padding: 14px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.4em;
+  }
+
+  .hero-content p {
+    font-size: 1em;
+    line-height: 1.7;
+  }
+
+  .container {
+    width: 100%;
+    padding: 45px 18px;
+  }
+
+  h2,
+  .pesan h2,
+  .admin-section-title h2 {
+    font-size: 2em;
+    line-height: 1.25;
+  }
+
+  .produk-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .card img {
+    height: 230px;
+  }
+
+  .card-body {
+    padding: 24px 20px;
+  }
+
+  .tentang {
+    padding: 42px 22px;
+  }
+
+  .tentang p {
+    font-size: 1em;
+  }
+
+  .pesan {
+    padding: 55px 18px;
+  }
+
+  .form-pesan {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .form-pesan input,
+  .form-pesan select,
+  .form-pesan textarea {
+    width: 100%;
+  }
+
+  .form-pesan button {
+    width: 100%;
+  }
+
+  /* Admin mobile */
+  .admin-header {
+    padding: 50px 18px;
+  }
+
+  .admin-header h1 {
+    font-size: 2em;
+    line-height: 1.25;
+  }
+
+  .admin-container {
+    width: 100%;
+    padding: 30px 14px;
+  }
+
+  .admin-section {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .admin-section-title {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .admin-section-title h2 {
+    text-align: left;
+  }
+
+  .admin-section-title p {
+    font-size: 0.95em;
+  }
+
+  .admin-form {
+    padding: 20px 16px;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .admin-field input,
+  .admin-field textarea {
+    width: 100%;
+  }
+
+  .admin-actions,
+  .admin-actions-inline,
+  .admin-table-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .admin-btn,
+  .admin-btn-small {
+    width: 100%;
+    display: block;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .admin-preview img {
+    width: 130px;
+    height: 100px;
+  }
+
+  /* Tabel admin diubah menjadi card agar tidak kepotong di HP */
+  .admin-table-wrapper {
+    overflow-x: visible;
+  }
+
+  .admin-table,
+  .admin-table thead,
+  .admin-table tbody,
+  .admin-table th,
+  .admin-table td,
+  .admin-table tr {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-table thead {
+    display: none;
+  }
+
+  .admin-table tr {
+    background: #fff;
+    border: 1px solid #ead4c5;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  }
+
+  .admin-table tr:hover td {
+    background: transparent;
+  }
+
+  .admin-table td {
+    border-bottom: 1px solid #f0ddd0;
+    padding: 10px 0;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .admin-table td:last-child {
+    border-bottom: none;
+  }
+
+  .admin-table td::before {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: #4b2c20;
+    font-size: 0.9em;
+  }
+
+  #produk-admin .admin-table td:nth-child(1)::before { content: 'Foto'; }
+  #produk-admin .admin-table td:nth-child(2)::before { content: 'Produk'; }
+  #produk-admin .admin-table td:nth-child(3)::before { content: 'Asal'; }
+  #produk-admin .admin-table td:nth-child(4)::before { content: 'Roasting'; }
+  #produk-admin .admin-table td:nth-child(5)::before { content: 'Harga'; }
+  #produk-admin .admin-table td:nth-child(6)::before { content: 'Aksi'; }
+
+  #pesanan-admin .admin-table td:nth-child(1)::before { content: 'ID'; }
+  #pesanan-admin .admin-table td:nth-child(2)::before { content: 'Nama'; }
+  #pesanan-admin .admin-table td:nth-child(3)::before { content: 'WhatsApp'; }
+  #pesanan-admin .admin-table td:nth-child(4)::before { content: 'Produk'; }
+  #pesanan-admin .admin-table td:nth-child(5)::before { content: 'Jumlah'; }
+  #pesanan-admin .admin-table td:nth-child(6)::before { content: 'Alamat'; }
+  #pesanan-admin .admin-table td:nth-child(7)::before { content: 'Waktu'; }
+  #pesanan-admin .admin-table td:nth-child(8)::before { content: 'Aksi'; }
+
+  .admin-product-img {
+    width: 120px;
+    height: 90px;
+  }
+}
+
+/* HP kecil */
+@media (max-width: 480px) {
+  .navbar {
+    gap: 6px;
+    padding: 10px 6px;
+  }
+
+  .navbar a {
+    padding: 7px 6px;
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 72vh;
+    padding: 65px 14px;
+  }
+
+  .hero-content h1 {
+    font-size: 2em;
+  }
+
+  .hero-content p {
+    font-size: 0.95em;
+  }
+
+  .cta-btn {
+    width: 100%;
+    max-width: 260px;
+    padding: 11px 20px;
+  }
+
+  h2,
+  .pesan h2,
+  .admin-section-title h2 {
+    font-size: 1.75em;
+  }
+
+  .card img {
+    height: 210px;
+  }
+
+  .card-body h3 {
+    font-size: 1.45em;
+  }
+
+  .price {
+    font-size: 1em;
+    padding: 8px 18px;
+  }
+
+  .form-pesan input,
+  .form-pesan select,
+  .form-pesan textarea,
+  .admin-field input,
+  .admin-field textarea {
+    font-size: 14px;
+  }
+
+  .admin-header h1 {
+    font-size: 1.75em;
+  }
+
+  .admin-section {
+    padding: 18px 14px;
+  }
+
+  .admin-form {
+    padding: 18px 14px;
+  }
+
+  .admin-product-img {
+    width: 100px;
+    height: 76px;
+  }
+}
