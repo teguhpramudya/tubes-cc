@@ -2,13 +2,13 @@
 
 Project ini merupakan tugas besar mata kuliah **Komputasi Awan**. Website yang digunakan adalah landing page katalog biji kopi dengan tampilan awal yang tetap dipertahankan, tetapi sistemnya dikembangkan menjadi arsitektur **3-tier**, yaitu frontend, backend, dan database.
 
-Project ini menggunakan **Docker Compose** untuk menjalankan seluruh service dalam container, kemudian di-deploy pada **AWS EC2** sebagai cloud server.
+Project ini menggunakan **Docker Compose** untuk menjalankan seluruh service dalam container, lalu di deploy pada **AWS EC2** sebagai cloud server.
 
 ---
 
 ## Deskripsi Project
 
-Website ini menampilkan katalog produk biji kopi Arabika dan form pemesanan. Pada versi awal, website hanya berupa landing page statis. Pada versi ini, sistem dikembangkan agar lebih sesuai dengan konsep komputasi awan dan arsitektur aplikasi modern.
+Website ini menampilkan katalog produk biji kopi dan form pemesanan. Sistem dikembangkan agar lebih sesuai dengan konsep komputasi awan dan arsitektur aplikasi modern.
 
 Perubahan utama pada project ini:
 
@@ -103,7 +103,7 @@ Foto produk yang diupload admin akan disimpan oleh backend dan ditampilkan melal
 
 ---
 
-## Struktur Folder
+## Folder Tree
 
 ```text
 tubes-cc/
@@ -362,7 +362,7 @@ EC2 berjalan di atas infrastruktur virtual milik AWS. Dengan virtualisasi, satu 
 
 Docker digunakan untuk menjalankan frontend, backend, dan database dalam container yang terisolasi. Dengan container, aplikasi lebih mudah dijalankan secara konsisten di local maupun cloud.
 
-### 5. 3-Tier Architecture
+### 5. 3 Architecture
 
 Sistem dibagi menjadi tiga bagian utama:
 
@@ -399,8 +399,8 @@ Arsitektur ini dapat dikembangkan lebih lanjut dengan menaikkan spesifikasi serv
 
 | Nama | Tugas |
 |---|---|
-| Teguh Pramudya | Frontend, GitHub Repository, Dokumentasi |
-| Naessya | Backend, Database, Docker, Deployment AWS |
+| Teguh Pramudya | Frontend, Backend, Database, GitHub Repository  |
+| Naessya | Docker, Deployment AWS |
 
 ---
 
