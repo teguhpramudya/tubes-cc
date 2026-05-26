@@ -1,0 +1,39 @@
+services:
+  frontend:
+    build: ./frontend
+    container_name: katalog-kopi-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: katalog-kopi-backend
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_USER: kopi_user
+      DB_PASSWORD: kopi_password
+      DB_NAME: katalog_kopi
+      DB_PORT: 3306
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: katalog-kopi-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: katalog_kopi
+      MYSQL_USER: kopi_user
+      MYSQL_PASSWORD: kopi_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  db_data:
