@@ -616,8 +616,8 @@ Arsitektur ini dapat dikembangkan dengan menaikkan spesifikasi EC2, memisahkan d
 
 | Nama | Tugas |
 |---|---|
-| Teguh Pramudya | Frontend, GitHub, dokumentasi, deployment |
-| Naessya | Backend, database, Docker, pengujian |
+| Teguh Pramudya | Frontend, GitHub, Database, deployment |
+| Naessya | Dokumentasi, database, Docker, pengujian |
 
 ---
 
