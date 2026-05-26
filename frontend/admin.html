@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Siputra Coffee Bean</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-page">
+    <nav class="navbar">
+        <a href="index.html">Landing Page</a>
+        <a href="#produk-admin">Kelola Produk</a>
+        <a href="#pesanan-admin">Data Pesanan</a>
+    </nav>
+
+    <header class="admin-header">
+        <h1>Admin Siputra Coffee Bean</h1>
+        <p>Kelola katalog biji kopi dan data pesanan yang masuk.</p>
+    </header>
+
+    <main class="admin-container">
+        <section id="produk-admin" class="admin-section">
+            <div class="admin-section-title">
+                <div>
+                    <h2>Kelola Produk Kopi</h2>
+                    <p>Produk yang tampil di halaman user akan tampil juga di tabel admin dan dapat diedit.</p>
+                </div>
+                <button type="button" class="admin-btn admin-btn-secondary" id="refresh-products-btn">Refresh Produk</button>
+            </div>
+
+            <form id="product-form" class="admin-form" enctype="multipart/form-data">
+                <input type="hidden" id="product-id">
+                <input type="hidden" id="current-image-url">
+
+                <div class="admin-form-grid">
+                    <div class="admin-field">
+                        <label for="product-name">Nama Produk</label>
+                        <input type="text" id="product-name" placeholder="Contoh: Arabika Gayo" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="product-origin">Asal Kopi</label>
+                        <input type="text" id="product-origin" placeholder="Contoh: Aceh Gayo" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="product-roast">Roasting</label>
+                        <input type="text" id="product-roast" placeholder="Contoh: Medium Roast" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="product-flavor">Catatan Rasa</label>
+                        <input type="text" id="product-flavor" placeholder="Contoh: Fruity, floral, smooth" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="product-weight">Berat</label>
+                        <input type="text" id="product-weight" placeholder="Contoh: 1 Kg" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="product-price">Harga</label>
+                        <input type="number" id="product-price" placeholder="Contoh: 230000" min="1" required>
+                    </div>
+                </div>
+
+                <div class="admin-field">
+                    <label for="product-description">Deskripsi Produk</label>
+                    <textarea id="product-description" placeholder="Masukkan deskripsi produk" required></textarea>
+                </div>
+
+                <div class="admin-field">
+                    <label for="product-image-file">Foto Produk JPG / PNG</label>
+                    <input type="file" id="product-image-file" accept="image/png, image/jpeg">
+                    <small>Pilih file JPG/PNG untuk produk baru atau untuk mengganti foto produk saat edit. Jika tidak memilih file saat edit, foto lama tetap digunakan.</small>
+                </div>
+
+                <div class="admin-preview" id="image-preview-wrapper" hidden>
+                    <p>Preview Foto:</p>
+                    <img id="image-preview" src="" alt="Preview foto produk">
+                </div>
+
+                <div class="admin-actions">
+                    <button type="submit" class="admin-btn" id="save-product-btn">Tambah Produk</button>
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancel-edit-btn" hidden>Batal Edit</button>
+                </div>
+            </form>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Produk</th>
+                            <th>Asal</th>
+                            <th>Roasting</th>
+                            <th>Harga</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        <tr>
+                            <td colspan="6">Memuat data produk...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="pesanan-admin" class="admin-section">
+            <div class="admin-section-title">
+                <div>
+                    <h2>Data Pesanan</h2>
+                    <p>Pesanan yang dikirim dari halaman user akan tampil di sini.</p>
+                </div>
+                <div class="admin-actions admin-actions-inline">
+                    <button type="button" class="admin-btn admin-btn-secondary" id="refresh-orders-btn">Refresh Pesanan</button>
+                    <button type="button" class="admin-btn admin-btn-danger" id="reset-orders-btn">Reset Pesanan</button>
+                </div>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>WhatsApp</th>
+                            <th>Produk</th>
+                            <th>Jumlah</th>
+                            <th>Alamat</th>
+                            <th>Waktu</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body">
+                        <tr>
+                            <td colspan="8">Memuat data pesanan...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Siputra Coffee Bean - Admin Panel.</p>
+    </footer>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

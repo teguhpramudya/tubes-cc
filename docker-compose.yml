@@ -18,6 +18,8 @@ services:
       DB_PASSWORD: kopi_password
       DB_NAME: katalog_kopi
       DB_PORT: 3306
+    volumes:
+      - uploads_data:/app/uploads
     depends_on:
       - db
     restart: unless-stopped
@@ -37,3 +39,4 @@ services:
 
 volumes:
   db_data:
+  uploads_data:

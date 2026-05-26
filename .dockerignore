@@ -1,11 +1,8 @@
 .git
-<<<<<<< HEAD
 node_modules
 .env
-=======
-.gitignore
-README.md
-Dockerfile
-.dockerignore
 .vscode/
->>>>>>> 99c84b4f1373426deb519ee25eb20b0d83ca7fc0
+.idea/
+*.log
+*.tmp
+backend/uploads/
