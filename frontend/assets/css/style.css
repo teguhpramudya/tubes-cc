@@ -866,3 +866,76 @@ button,
     height: 76px;
   }
 }
+
+/* ========================= */
+/* Final Hero Height Adjustment */
+/* Supaya section atas tidak terlalu panjang di desktop, tablet, dan HP */
+/* ========================= */
+
+.hero {
+  height: auto !important;
+  min-height: 78vh !important;
+  padding: 95px 20px !important;
+}
+
+.admin-header {
+  min-height: 300px !important;
+  padding: 80px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 992px) {
+  .hero {
+    min-height: 68vh !important;
+    padding: 78px 20px !important;
+  }
+
+  .admin-header {
+    min-height: 260px !important;
+    padding: 65px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 58vh !important;
+    padding: 60px 16px !important;
+  }
+
+  .admin-header {
+    min-height: 220px !important;
+    padding: 50px 16px !important;
+  }
+
+  .hero-content h1,
+  .admin-header h1 {
+    font-size: 2em !important;
+    line-height: 1.2;
+  }
+
+  .hero-content p,
+  .admin-header p {
+    font-size: 0.95em !important;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 54vh !important;
+    padding: 48px 14px !important;
+  }
+
+  .admin-header {
+    min-height: 190px !important;
+    padding: 42px 14px !important;
+  }
+
+  .hero-content h1,
+  .admin-header h1 {
+    font-size: 1.75em !important;
+  }
+}
