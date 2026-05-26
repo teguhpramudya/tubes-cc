@@ -11,6 +11,16 @@ CREATE TABLE IF NOT EXISTS products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS payment_methods (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bank_name VARCHAR(100) NOT NULL,
+    account_number VARCHAR(50) NOT NULL,
+    account_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(100) NOT NULL,
@@ -18,6 +28,10 @@ CREATE TABLE IF NOT EXISTS orders (
     product_id INT NOT NULL,
     quantity INT NOT NULL,
     address TEXT NOT NULL,
+    payment_method_id INT NULL,
+    payment_method VARCHAR(100) DEFAULT 'Transfer BCA',
+    payment_status VARCHAR(50) DEFAULT 'Menunggu Verifikasi',
+    payment_proof_url VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_orders_products
         FOREIGN KEY (product_id) REFERENCES products(id)
@@ -38,3 +52,12 @@ ON DUPLICATE KEY UPDATE
     price = VALUES(price),
     image_url = VALUES(image_url),
     description = VALUES(description);
+
+INSERT INTO payment_methods (id, bank_name, account_number, account_name, description, is_active) VALUES
+(1, 'BCA', '1234567890', 'Siputra Coffee Beans', 'Setelah pesanan dikirim, silakan lakukan pembayaran melalui transfer BCA, lalu upload bukti transfer pada form pemesanan.', 1)
+ON DUPLICATE KEY UPDATE
+    bank_name = VALUES(bank_name),
+    account_number = VALUES(account_number),
+    account_name = VALUES(account_name),
+    description = VALUES(description),
+    is_active = VALUES(is_active);

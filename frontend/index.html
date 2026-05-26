@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siputra Coffee Bean</title>
+    <title>Siputra Coffee Beans</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -21,7 +21,7 @@
     <header id="home" class="hero">
         <div class="hero-overlay">
             <div class="hero-content">
-                <h1>Siputra Coffee Bean</h1>
+                <h1>Siputra Coffee Beans</h1>
                 <p>
                     Nikmati keajaiban aroma biji kopi Arabika premium
                     dari berbagai daerah di Indonesia. Temukan cita rasa yang
@@ -37,71 +37,41 @@
 
     <!-- Produk -->
     <section id="produk" class="container">
-
         <h2>Katalog Produk</h2>
-
         <div class="produk-list" id="produk-list">
-
-            <!-- Produk 1 -->
             <div class="card">
                 <img src="assets/img/kopi-gayo.jpg" alt="Arabika Gayo">
-
                 <div class="card-body">
                     <h3>Arabika Gayo</h3>
-
-                    <p>
-                        Biji kopi premium dari Aceh Gayo dengan aroma khas dan rasa lembut.
-                    </p>
-
-                    <p class="price">
-                        Rp 230.000/Kg
-                    </p>
+                    <p>Biji kopi premium dari Aceh Gayo dengan aroma khas dan rasa lembut.</p>
+                    <p class="price">Rp 230.000/Kg</p>
                 </div>
             </div>
 
-            <!-- Produk 2 -->
             <div class="card">
                 <img src="assets/img/kopi-kerinci.jpg" alt="Arabika Kerinci">
-
                 <div class="card-body">
                     <h3>Arabika Kerinci</h3>
-
-                    <p>
-                        Memiliki karakter fruity dengan tingkat acidity seimbang.
-                    </p>
-
-                    <p class="price">
-                        Rp 250.000/Kg
-                    </p>
+                    <p>Memiliki karakter fruity dengan tingkat acidity seimbang.</p>
+                    <p class="price">Rp 250.000/Kg</p>
                 </div>
             </div>
 
-            <!-- Produk 3 -->
             <div class="card">
                 <img src="assets/img/kopi-robusta.jpg" alt="Arabika Toraja">
-
                 <div class="card-body">
                     <h3>Arabika Toraja</h3>
-
-                    <p>
-                        Aroma kuat dengan rasa bold khas kopi pegunungan Toraja.
-                    </p>
-
-                    <p class="price">
-                        Rp 240.000/Kg
-                    </p>
+                    <p>Aroma kuat dengan rasa bold khas kopi pegunungan Toraja.</p>
+                    <p class="price">Rp 240.000/Kg</p>
                 </div>
             </div>
-
         </div>
     </section>
 
     <!-- Tentang -->
     <section id="tentang" class="container">
-
         <div class="tentang">
             <h2>Tentang Kami</h2>
-
             <p>
                 Kami berdedikasi untuk menghadirkan biji kopi kualitas terbaik
                 dari petani lokal Indonesia ke cangkir Anda. Dengan pengalaman bertahun-tahun
@@ -109,33 +79,16 @@
                 dipilih dengan cermat untuk memberikan rasa dan aroma yang luar biasa.
             </p>
         </div>
-
     </section>
 
     <!-- Form Pemesanan -->
     <section id="pesan" class="pesan">
-
         <h2>Form Pemesanan</h2>
+        <p>Isi form berikut untuk memesan kopi favoritmu.</p>
 
-        <p>
-            Isi form berikut untuk memesan kopi favoritmu.
-        </p>
-
-        <form class="form-pesan" id="order-form">
-
-            <input
-                type="text"
-                id="customer-name"
-                placeholder="Nama Lengkap"
-                required
-            >
-
-            <input
-                type="text"
-                id="customer-whatsapp"
-                placeholder="Nomor WhatsApp"
-                required
-            >
+        <form class="form-pesan" id="order-form" enctype="multipart/form-data">
+            <input type="text" id="customer-name" placeholder="Nama Lengkap" required>
+            <input type="text" id="customer-whatsapp" placeholder="Nomor WhatsApp" required>
 
             <select id="product-select" required>
                 <option value="">Pilih Produk Kopi</option>
@@ -144,36 +97,38 @@
                 <option>Arabika Toraja</option>
             </select>
 
-            <input
-                type="number"
-                id="quantity"
-                placeholder="Jumlah Pesanan"
-                min="1"
-                required
-            >
+            <input type="number" id="quantity" placeholder="Jumlah Pesanan" min="1" max="99" required>
+            <textarea id="address" placeholder="Alamat Pengiriman" required></textarea>
 
-            <textarea
-                id="address"
-                placeholder="Alamat Pengiriman"
-                required
-            ></textarea>
+            <div class="payment-info">
+                <h3>Metode Pembayaran</h3>
+                <select id="payment-method-select" class="payment-method-select" required>
+                    <option value="">Memuat metode pembayaran...</option>
+                </select>
+                <div class="payment-card" id="payment-method-detail">
+                    <p>Memuat detail rekening...</p>
+                </div>
+            </div>
 
-            <button type="submit">
-                Pesan Sekarang
-            </button>
+            <div class="payment-proof-field">
+                <label for="payment-proof-file">Upload Bukti Transfer</label>
+                <input type="file" id="payment-proof-file" accept="image/png, image/jpeg" required>
+                <small>Upload bukti transfer dalam format JPG atau PNG. Maksimal ukuran file 10 MB.</small>
+                <div class="payment-proof-preview" id="payment-proof-preview-wrapper" hidden>
+                    <p>Preview Bukti Transfer:</p>
+                    <img id="payment-proof-preview" src="" alt="Preview bukti transfer">
+                </div>
+            </div>
 
+            <button type="submit">Pesan Sekarang</button>
         </form>
-
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>
-            &copy; 2026 Siputra Coffee Bean. All rights reserved.
-        </p>
+        <p>&copy; 2026 Siputra Coffee Beans. All rights reserved.</p>
     </footer>
 
     <script src="assets/js/script.js"></script>
-
 </body>
 </html>

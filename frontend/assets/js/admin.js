@@ -1,3 +1,9 @@
+const ADMIN_LOGIN_KEY = 'siputra_admin_logged_in';
+
+if (localStorage.getItem(ADMIN_LOGIN_KEY) !== 'true') {
+  window.location.replace('login.html');
+}
+
 const rupiahFormatter = new Intl.NumberFormat('id-ID', {
   style: 'currency',
   currency: 'IDR',
@@ -6,6 +12,8 @@ const rupiahFormatter = new Intl.NumberFormat('id-ID', {
 
 const productsTableBody = document.getElementById('products-table-body');
 const ordersTableBody = document.getElementById('orders-table-body');
+const paymentsTableBody = document.getElementById('payments-table-body');
+
 const productForm = document.getElementById('product-form');
 const productIdInput = document.getElementById('product-id');
 const currentImageInput = document.getElementById('current-image-url');
@@ -15,7 +23,13 @@ const imagePreview = document.getElementById('image-preview');
 const saveProductButton = document.getElementById('save-product-btn');
 const cancelEditButton = document.getElementById('cancel-edit-btn');
 
+const paymentForm = document.getElementById('payment-form');
+const paymentIdInput = document.getElementById('payment-id');
+const savePaymentButton = document.getElementById('save-payment-btn');
+const cancelPaymentEditButton = document.getElementById('cancel-payment-edit-btn');
+
 let productsCache = [];
+let paymentMethodsCache = [];
 
 function formatRupiah(value) {
   return rupiahFormatter.format(Number(value)).replace(/\s/g, ' ');
@@ -40,7 +54,8 @@ function formatDate(value) {
 
 async function requestJson(url, options = {}) {
   const response = await fetch(url, options);
-  const data = await response.json().catch(() => ({}));
+  const contentType = response.headers.get('content-type') || '';
+  const data = contentType.includes('application/json') ? await response.json() : {};
 
   if (!response.ok) {
     throw new Error(data.message || 'Request gagal diproses.');
@@ -52,8 +67,12 @@ async function requestJson(url, options = {}) {
 async function uploadImageIfSelected() {
   const file = productImageFileInput.files[0];
 
-  if (!file) {
+  if (!file && currentImageInput.value) {
     return currentImageInput.value;
+  }
+
+  if (!file) {
+    return '';
   }
 
   const formData = new FormData();
@@ -87,19 +106,23 @@ function renderProducts(products) {
 
   productsTableBody.innerHTML = products.map((product) => `
     <tr>
-      <td>
-        <img class="admin-product-img" src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.name)}">
-      </td>
+      <td><img src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.name)}" class="admin-product-img"></td>
       <td>
         <strong>${escapeHtml(product.name)}</strong><br>
         <small>${escapeHtml(product.description)}</small>
       </td>
       <td>${escapeHtml(product.origin)}</td>
-      <td>${escapeHtml(product.roast_level)}<br><small>${escapeHtml(product.flavor_notes)}</small></td>
-      <td>${formatRupiah(product.price)}<br><small>${escapeHtml(product.weight)}</small></td>
+      <td>
+        ${escapeHtml(product.roast_level)}<br>
+        <small>${escapeHtml(product.flavor_notes)}</small>
+      </td>
+      <td>
+        ${formatRupiah(product.price)}<br>
+        <small>${escapeHtml(product.weight)}</small>
+      </td>
       <td>
         <div class="admin-table-actions">
-          <button type="button" class="admin-btn admin-btn-small" onclick="startEditProduct(${product.id})">Edit</button>
+          <button type="button" class="admin-btn admin-btn-small" onclick="editProduct(${product.id})">Edit</button>
           <button type="button" class="admin-btn admin-btn-small admin-btn-danger" onclick="deleteProduct(${product.id})">Hapus</button>
         </div>
       </td>
@@ -107,7 +130,7 @@ function renderProducts(products) {
   `).join('');
 }
 
-function startEditProduct(productId) {
+function editProduct(productId) {
   const product = productsCache.find((item) => Number(item.id) === Number(productId));
 
   if (!product) {
@@ -202,20 +225,130 @@ async function deleteProduct(productId) {
   }
 }
 
+async function loadPayments() {
+  paymentsTableBody.innerHTML = '<tr><td colspan="5">Memuat metode pembayaran...</td></tr>';
+
+  try {
+    const payments = await requestJson('/api/payment-methods');
+    paymentMethodsCache = payments;
+    renderPayments(payments);
+  } catch (error) {
+    paymentsTableBody.innerHTML = `<tr><td colspan="5">${escapeHtml(error.message)}</td></tr>`;
+  }
+}
+
+function renderPayments(payments) {
+  if (!payments.length) {
+    paymentsTableBody.innerHTML = '<tr><td colspan="5">Belum ada metode pembayaran.</td></tr>';
+    return;
+  }
+
+  paymentsTableBody.innerHTML = payments.map((payment) => `
+    <tr>
+      <td><strong>Transfer ${escapeHtml(payment.bank_name)}</strong><br><small>${escapeHtml(payment.description || '-')}</small></td>
+      <td>${escapeHtml(payment.account_number)}</td>
+      <td>${escapeHtml(payment.account_name)}</td>
+      <td><span class="status-badge ${Number(payment.is_active) === 1 ? 'status-active' : 'status-inactive'}">${Number(payment.is_active) === 1 ? 'Aktif' : 'Nonaktif'}</span></td>
+      <td>
+        <div class="admin-table-actions">
+          <button type="button" class="admin-btn admin-btn-small" onclick="editPayment(${payment.id})">Edit</button>
+          <button type="button" class="admin-btn admin-btn-small admin-btn-danger" onclick="deletePayment(${payment.id})">Hapus</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function editPayment(paymentId) {
+  const payment = paymentMethodsCache.find((item) => Number(item.id) === Number(paymentId));
+
+  if (!payment) {
+    alert('Metode pembayaran tidak ditemukan.');
+    return;
+  }
+
+  paymentIdInput.value = payment.id;
+  document.getElementById('payment-bank').value = payment.bank_name;
+  document.getElementById('payment-account-number').value = payment.account_number;
+  document.getElementById('payment-account-name').value = payment.account_name;
+  document.getElementById('payment-description').value = payment.description || '';
+  document.getElementById('payment-active').value = Number(payment.is_active) === 1 ? '1' : '0';
+
+  savePaymentButton.textContent = 'Simpan Perubahan';
+  cancelPaymentEditButton.hidden = false;
+  paymentForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetPaymentForm() {
+  paymentForm.reset();
+  paymentIdInput.value = '';
+  document.getElementById('payment-active').value = '1';
+  savePaymentButton.textContent = 'Tambah Metode';
+  cancelPaymentEditButton.hidden = true;
+}
+
+async function savePayment(event) {
+  event.preventDefault();
+
+  const payload = {
+    bank_name: document.getElementById('payment-bank').value.trim(),
+    account_number: document.getElementById('payment-account-number').value.trim(),
+    account_name: document.getElementById('payment-account-name').value.trim(),
+    description: document.getElementById('payment-description').value.trim(),
+    is_active: Number(document.getElementById('payment-active').value),
+  };
+
+  const paymentId = paymentIdInput.value;
+  const isEdit = Boolean(paymentId);
+
+  try {
+    await requestJson(isEdit ? `/api/payment-methods/${paymentId}` : '/api/payment-methods', {
+      method: isEdit ? 'PUT' : 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    alert(isEdit ? 'Metode pembayaran berhasil diperbarui.' : 'Metode pembayaran berhasil ditambahkan.');
+    resetPaymentForm();
+    await loadPayments();
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
+async function deletePayment(paymentId) {
+  const confirmDelete = confirm('Yakin ingin menghapus metode pembayaran ini?');
+
+  if (!confirmDelete) return;
+
+  try {
+    await requestJson(`/api/payment-methods/${paymentId}`, {
+      method: 'DELETE',
+    });
+
+    alert('Metode pembayaran berhasil dihapus.');
+    await loadPayments();
+  } catch (error) {
+    alert(error.message);
+  }
+}
+
 async function loadOrders() {
-  ordersTableBody.innerHTML = '<tr><td colspan="8">Memuat data pesanan...</td></tr>';
+  ordersTableBody.innerHTML = '<tr><td colspan="11">Memuat data pesanan...</td></tr>';
 
   try {
     const orders = await requestJson('/api/orders');
     renderOrders(orders);
   } catch (error) {
-    ordersTableBody.innerHTML = `<tr><td colspan="8">${escapeHtml(error.message)}</td></tr>`;
+    ordersTableBody.innerHTML = `<tr><td colspan="11">${escapeHtml(error.message)}</td></tr>`;
   }
 }
 
 function renderOrders(orders) {
   if (!orders.length) {
-    ordersTableBody.innerHTML = '<tr><td colspan="8">Belum ada pesanan.</td></tr>';
+    ordersTableBody.innerHTML = '<tr><td colspan="11">Belum ada pesanan.</td></tr>';
     return;
   }
 
@@ -227,12 +360,43 @@ function renderOrders(orders) {
       <td>${escapeHtml(order.product_name)}</td>
       <td>${escapeHtml(order.quantity)}</td>
       <td>${escapeHtml(order.address)}</td>
+      <td>${escapeHtml(order.payment_method || '-')}</td>
+      <td>
+        <select class="status-select" onchange="updatePaymentStatus(${order.id}, this.value)">
+          ${['Menunggu Verifikasi', 'Sudah Dibayar', 'Ditolak', 'Dibatalkan'].map((status) => `
+            <option value="${status}" ${order.payment_status === status ? 'selected' : ''}>${status}</option>
+          `).join('')}
+        </select>
+      </td>
+      <td>
+        ${order.payment_proof_url ? `
+          <a href="${escapeHtml(order.payment_proof_url)}" target="_blank" class="proof-link">
+            <img src="${escapeHtml(order.payment_proof_url)}" alt="Bukti transfer" class="payment-proof-img">
+            <span>Lihat Bukti</span>
+          </a>
+        ` : '<span class="muted-text">Tidak ada</span>'}
+      </td>
       <td>${formatDate(order.created_at)}</td>
       <td>
         <button type="button" class="admin-btn admin-btn-small admin-btn-danger" onclick="deleteOrder(${order.id})">Hapus</button>
       </td>
     </tr>
   `).join('');
+}
+
+async function updatePaymentStatus(orderId, paymentStatus) {
+  try {
+    await requestJson(`/api/orders/${orderId}/payment-status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ payment_status: paymentStatus }),
+    });
+  } catch (error) {
+    alert(error.message);
+    await loadOrders();
+  }
 }
 
 async function deleteOrder(orderId) {
@@ -287,9 +451,18 @@ productImageFileInput.addEventListener('change', () => {
 
 productForm.addEventListener('submit', saveProduct);
 cancelEditButton.addEventListener('click', resetProductForm);
+paymentForm.addEventListener('submit', savePayment);
+cancelPaymentEditButton.addEventListener('click', resetPaymentForm);
+
 document.getElementById('refresh-products-btn').addEventListener('click', loadProducts);
+document.getElementById('refresh-payments-btn').addEventListener('click', loadPayments);
 document.getElementById('refresh-orders-btn').addEventListener('click', loadOrders);
 document.getElementById('reset-orders-btn').addEventListener('click', resetOrders);
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem(ADMIN_LOGIN_KEY);
+  window.location.replace('login.html');
+});
 
 loadProducts();
+loadPayments();
 loadOrders();

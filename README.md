@@ -406,6 +406,6 @@ Arsitektur ini dapat dikembangkan lebih lanjut dengan menaikkan spesifikasi serv
 
 ## Kesimpulan
 
-Project ini menunjukkan implementasi komputasi awan dalam bentuk aplikasi katalog biji kopi berbasis web. Website dikembangkan menggunakan arsitektur 3-tier yang terdiri dari frontend, backend, dan database. Seluruh komponen dijalankan menggunakan Docker Compose pada satu VM AWS EC2 sehingga aplikasi dapat diakses melalui internet.
+Project ini menunjukkan implementasi komputasi awan dalam bentuk website katalog biji kopi berbasis web. Website dikembangkan menggunakan arsitektur 3-tier yang terdiri dari frontend, backend, dan database. Seluruh komponen dijalankan menggunakan Docker Compose pada satu VM AWS EC2 sehingga aplikasi dapat diakses melalui internet.
 
 Dengan menggunakan Docker, GitHub, dan AWS EC2, proses pengembangan, deployment, dan pengelolaan aplikasi menjadi lebih terstruktur, fleksibel, dan sesuai dengan konsep dasar komputasi awan.

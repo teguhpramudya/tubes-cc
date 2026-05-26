@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Siputra Coffee Bean</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="login-page">
+    <main class="login-wrapper">
+        <section class="login-card">
+            <h1>Login Admin</h1>
+            <p>Masuk untuk mengelola produk, pesanan, dan pembayaran.</p>
+
+            <form id="login-form" class="login-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username" autocomplete="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password" required>
+
+                <div id="login-message" class="login-message" hidden></div>
+
+                <button type="submit" class="admin-btn">Login</button>
+            </form>
+
+            <a class="login-back-link" href="index.html">Kembali ke landing page</a>
+        </section>
+    </main>
+
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

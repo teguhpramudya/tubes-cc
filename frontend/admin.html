@@ -7,23 +7,42 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="admin-page">
-    <nav class="navbar">
-        <a href="index.html">Landing Page</a>
-        <a href="#produk-admin">Kelola Produk</a>
-        <a href="#pesanan-admin">Data Pesanan</a>
-    </nav>
+    <aside class="admin-sidebar">
+        <div class="admin-brand">Siputra</div>
 
-    <header class="admin-header">
-        <h1>Admin Siputra Coffee Bean</h1>
-        <p>Kelola katalog biji kopi dan data pesanan yang masuk.</p>
-    </header>
+        <nav class="admin-sidebar-menu" aria-label="Menu admin">
+            <a href="#produk-admin" class="admin-sidebar-icon active" title="Produk" aria-label="Produk">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10h10v5a5 5 0 0 1-5 5 5 5 0 0 1-5-5v-5Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 6c0 1.2 1 1.6 1 2.5M12 5c0 1.5 1 1.9 1 3M16 6c0 1.2 1 1.6 1 2.5"/></svg>
+            </a>
+            <a href="#pembayaran-admin" class="admin-sidebar-icon" title="Pembayaran" aria-label="Pembayaran">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+            </a>
+            <a href="#pesanan-admin" class="admin-sidebar-icon" title="Pesanan" aria-label="Pesanan">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v18l-2-1-2 1-2-1-2 1-2-1-2 1V3Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+            </a>
+            <a href="index.html" class="admin-sidebar-icon" title="Landing Page" aria-label="Landing Page">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+            </a>
+        </nav>
+    </aside>
 
-    <main class="admin-container">
+    <main class="admin-dashboard">
+        <header class="admin-topbar">
+            <div>
+                <h1>Admin Siputra Coffee Bean</h1>
+                <p>Kelola katalog, metode pembayaran, bukti transfer, dan pesanan.</p>
+            </div>
+            <div class="admin-topbar-actions">
+                <a class="admin-btn admin-btn-secondary" href="index.html">Lihat Website</a>
+                <button type="button" class="admin-btn admin-btn-danger" id="logout-btn">Logout</button>
+            </div>
+        </header>
+
         <section id="produk-admin" class="admin-section">
             <div class="admin-section-title">
                 <div>
                     <h2>Kelola Produk Kopi</h2>
-                    <p>Produk yang tampil di halaman user akan tampil juga di tabel admin dan dapat diedit.</p>
+                    <p>Produk yang tampil di halaman user dapat ditambah, diedit, dan dihapus dari sini.</p>
                 </div>
                 <button type="button" class="admin-btn admin-btn-secondary" id="refresh-products-btn">Refresh Produk</button>
             </div>
@@ -72,7 +91,7 @@
                 <div class="admin-field">
                     <label for="product-image-file">Foto Produk JPG / PNG</label>
                     <input type="file" id="product-image-file" accept="image/png, image/jpeg">
-                    <small>Pilih file JPG/PNG untuk produk baru atau untuk mengganti foto produk saat edit. Jika tidak memilih file saat edit, foto lama tetap digunakan.</small>
+                    <small>Pilih file JPG/PNG untuk produk baru atau untuk mengganti foto produk saat edit.</small>
                 </div>
 
                 <div class="admin-preview" id="image-preview-wrapper" hidden>
@@ -99,9 +118,73 @@
                         </tr>
                     </thead>
                     <tbody id="products-table-body">
+                        <tr><td colspan="6">Memuat data produk...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="pembayaran-admin" class="admin-section">
+            <div class="admin-section-title">
+                <div>
+                    <h2>Kelola Metode Pembayaran</h2>
+                    <p>Metode pembayaran yang aktif akan tampil pada form pemesanan user.</p>
+                </div>
+                <button type="button" class="admin-btn admin-btn-secondary" id="refresh-payments-btn">Refresh Pembayaran</button>
+            </div>
+
+            <form id="payment-form" class="admin-form">
+                <input type="hidden" id="payment-id">
+
+                <div class="admin-form-grid">
+                    <div class="admin-field">
+                        <label for="payment-bank">Nama Bank</label>
+                        <input type="text" id="payment-bank" placeholder="Contoh: BCA" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="payment-account-number">Nomor Rekening</label>
+                        <input type="text" id="payment-account-number" placeholder="Contoh: 1234567890" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="payment-account-name">Atas Nama</label>
+                        <input type="text" id="payment-account-name" placeholder="Contoh: Siputra Coffee Beans" required>
+                    </div>
+
+                    <div class="admin-field">
+                        <label for="payment-active">Status</label>
+                        <select id="payment-active">
+                            <option value="1">Aktif</option>
+                            <option value="0">Nonaktif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-field">
+                    <label for="payment-description">Catatan Pembayaran</label>
+                    <textarea id="payment-description" placeholder="Contoh: Setelah transfer, upload bukti pembayaran pada form pemesanan."></textarea>
+                </div>
+
+                <div class="admin-actions">
+                    <button type="submit" class="admin-btn" id="save-payment-btn">Tambah Metode</button>
+                    <button type="button" class="admin-btn admin-btn-secondary" id="cancel-payment-edit-btn" hidden>Batal Edit</button>
+                </div>
+            </form>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
                         <tr>
-                            <td colspan="6">Memuat data produk...</td>
+                            <th>Bank</th>
+                            <th>No. Rekening</th>
+                            <th>Atas Nama</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
+                    </thead>
+                    <tbody id="payments-table-body">
+                        <tr><td colspan="5">Memuat metode pembayaran...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -111,7 +194,7 @@
             <div class="admin-section-title">
                 <div>
                     <h2>Data Pesanan</h2>
-                    <p>Pesanan yang dikirim dari halaman user akan tampil di sini.</p>
+                    <p>Pesanan user, metode pembayaran, status, dan bukti transfer tampil di sini.</p>
                 </div>
                 <div class="admin-actions admin-actions-inline">
                     <button type="button" class="admin-btn admin-btn-secondary" id="refresh-orders-btn">Refresh Pesanan</button>
@@ -129,23 +212,20 @@
                             <th>Produk</th>
                             <th>Jumlah</th>
                             <th>Alamat</th>
+                            <th>Pembayaran</th>
+                            <th>Status</th>
+                            <th>Bukti</th>
                             <th>Waktu</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="orders-table-body">
-                        <tr>
-                            <td colspan="8">Memuat data pesanan...</td>
-                        </tr>
+                        <tr><td colspan="11">Memuat data pesanan...</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Siputra Coffee Bean - Admin Panel.</p>
-    </footer>
 
     <script src="assets/js/admin.js"></script>
 </body>
