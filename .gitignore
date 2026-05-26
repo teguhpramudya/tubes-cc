@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 node_modules
 .env
 .DS_Store
 db_data
+=======
+.DS_Store
+Thumbs.db
+.dockerignore
+.vscode/
+.idea/
+*.log
+*.tmp
+>>>>>>> 99c84b4f1373426deb519ee25eb20b0d83ca7fc0
