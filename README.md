@@ -1,38 +1,108 @@
-# Siputra Coffee Bean — Landing Page Katalog Biji Kopi
+# Siputra Coffee Beans — Landing Page Katalog Biji Kopi
 
-Project ini merupakan tugas besar mata kuliah **Komputasi Awan** dengan topik **Landing Page Katalog Biji Kopi Menggunakan Docker, GitHub, dan Cloud AWS**.
+Project ini adalah Tugas Besar mata kuliah **Komputasi Awan (Cloud Computing)** dengan topik:
 
-Website ini awalnya berupa landing page katalog biji kopi, lalu dikembangkan menjadi aplikasi web sederhana berbasis **3-Tier Architecture** yang terdiri dari **frontend**, **backend**, dan **database**. Project ini dijalankan menggunakan **Docker Compose**, disimpan di **GitHub**, dan di-deploy ke **AWS EC2**.
+> **Landing Page Katalog Biji Kopi Menggunakan Docker, GitHub, dan Cloud AWS**
 
----
-
-## Deskripsi Project
-
-**Siputra Coffee Bean** adalah website katalog biji kopi yang menampilkan produk kopi, form pemesanan, metode pembayaran, upload bukti transfer, serta halaman admin untuk mengelola data.
-
-Fitur utama project:
-
-- Menampilkan katalog produk biji kopi.
-- Data produk diambil dari database melalui backend API.
-- User dapat klik harga produk untuk langsung menuju form pemesanan.
-- User dapat mengisi form pemesanan.
-- Form memiliki validasi agar user tidak mengisi data secara asal.
-- User dapat memilih metode pembayaran.
-- User dapat upload bukti transfer JPG/PNG.
-- Admin dapat login menggunakan username dan password sederhana.
-- Admin dapat mengelola produk.
-- Admin dapat mengelola metode pembayaran.
-- Admin dapat melihat pesanan dan bukti transfer.
-- Admin dapat mengubah status pembayaran.
-- Website responsive untuk desktop, tablet, dan mobile.
-- Frontend, backend, dan database berjalan dalam container Docker.
-- Deployment dilakukan pada AWS EC2.
+Website ini menampilkan katalog biji kopi, form pemesanan, metode pembayaran, upload bukti transfer, serta halaman admin untuk mengelola produk, pembayaran, dan pesanan.
 
 ---
 
-## Arsitektur Sistem
+## 1. Identitas Project
 
-Project ini menggunakan implementasi **1 VM AWS EC2 dengan 3 container Docker**.
+| Keterangan | Isi |
+|---|---|
+| Nama Website | Siputra Coffee Beans |
+| Jenis Project | Landing Page + Admin Dashboard |
+| Arsitektur | 3-Tier Architecture |
+| Frontend | HTML, CSS, JavaScript, Nginx |
+| Backend | Node.js, Express.js |
+| Database | MySQL |
+| Container | Docker dan Docker Compose |
+| Cloud | AWS EC2 |
+| Repository | https://github.com/teguhpramudya/tubes-cc |
+
+---
+
+## 2. Fitur Utama
+
+### Fitur User
+
+- Melihat landing page Siputra Coffee Beans.
+- Melihat katalog produk biji kopi.
+- Klik harga produk untuk langsung menuju form pemesanan.
+- Produk otomatis terpilih saat user klik harga pada katalog.
+- Mengisi form pemesanan.
+- Memilih metode pembayaran.
+- Melihat detail rekening pembayaran.
+- Upload bukti transfer dalam format JPG/PNG.
+- Validasi input agar user tidak mengisi data secara asal.
+- Tampilan responsive untuk desktop, tablet, dan mobile.
+- Logo website muncul pada tab browser/taskbar browser melalui favicon.
+
+### Fitur Admin
+
+- Login admin sederhana menggunakan username dan password.
+- Dashboard admin dengan tampilan simple dan warna coklat-krem-putih.
+- Sidebar admin menggunakan logo `logo.jpg`.
+- Logo admin memiliki animasi hover.
+- Admin dapat mengelola produk:
+  - tambah produk,
+  - edit produk,
+  - hapus produk,
+  - upload foto produk.
+- Admin dapat mengelola metode pembayaran:
+  - tambah metode pembayaran,
+  - edit metode pembayaran,
+  - aktif/nonaktif metode pembayaran,
+  - hapus metode pembayaran.
+- Admin dapat melihat data pesanan.
+- Admin dapat melihat bukti transfer yang diupload user.
+- Admin dapat mengubah status pembayaran pesanan.
+- Admin dapat menghapus pesanan.
+
+---
+
+## 3. Login Admin
+
+Halaman login admin:
+
+```text
+http://localhost/login.html
+```
+
+Akun login:
+
+```text
+Username: admin
+Password: admin123
+```
+
+Setelah login berhasil, admin akan langsung diarahkan ke halaman:
+
+```text
+http://localhost/admin.html
+```
+
+---
+
+## 4. Metode Pembayaran
+
+Metode pembayaran default:
+
+```text
+Transfer Bank : BCA
+No. Rekening  : 1234567890
+Atas Nama     : Siputra Coffee Beans
+```
+
+Metode pembayaran dapat ditambah, diedit, dinonaktifkan, atau dihapus melalui halaman admin.
+
+---
+
+## 5. Arsitektur Sistem
+
+Project ini menggunakan arsitektur **3-tier**, yaitu:
 
 ```text
 User / Browser
@@ -47,153 +117,100 @@ Database Container
 MySQL
 ```
 
-Admin page tetap berada di dalam **frontend container**, sehingga deployment tetap menggunakan **1 VM AWS EC2**.
+Penjelasan layer:
 
-```text
-1 VM AWS EC2
-├── frontend container
-│   ├── index.html
-│   ├── login.html
-│   └── admin.html
-├── backend container
-└── database container
-```
-
----
-
-## Pembagian Layer
-
-| Layer | Fungsi | Teknologi |
+| Layer | Fungsi | Implementasi |
 |---|---|---|
-| Frontend | Menampilkan landing page, form pemesanan, login admin, dan dashboard admin | HTML, CSS, JavaScript, Nginx |
-| Backend | Menyediakan API produk, pesanan, metode pembayaran, upload gambar, dan upload bukti transfer | Node.js, Express, Multer |
-| Database | Menyimpan produk, metode pembayaran, pesanan, status pembayaran, dan path bukti transfer | MySQL |
-| Cloud Server | Menjalankan semua container | AWS EC2 Ubuntu |
-| Containerization | Menjalankan service secara terisolasi | Docker, Docker Compose |
-| Repository | Menyimpan source code project | GitHub |
+| Presentation Layer | Menampilkan halaman website | Frontend HTML, CSS, JS, Nginx |
+| Application Layer | Mengolah request dan API | Backend Node.js + Express |
+| Data Layer | Menyimpan data aplikasi | MySQL |
 
 ---
 
-## Struktur Folder
+## 6. Struktur Folder
 
 ```text
 tubes-cc/
-├── frontend/
-│   ├── index.html
-│   ├── login.html
-│   ├── admin.html
-│   ├── assets/
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   ├── img/
-│   │   └── js/
-│   │       ├── script.js
-│   │       ├── login.js
-│   │       └── admin.js
-│   ├── Dockerfile
-│   └── nginx.conf
-│
 ├── backend/
-│   ├── server.js
-│   ├── package.json
+│   ├── .dockerignore
 │   ├── Dockerfile
-│   └── .dockerignore
+│   ├── package.json
+│   └── server.js
 │
 ├── database/
 │   └── init.sql
 │
-├── docker-compose.yml
-├── README.md
+├── docs/
+│   └── HANDS_ON.md
+│
+├── frontend/
+│   ├── assets/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   ├── img/
+│   │   │   ├── favicon.ico
+│   │   │   ├── hero-bg.jpg
+│   │   │   ├── kopi-gayo.jpg
+│   │   │   ├── kopi-kerinci.jpg
+│   │   │   ├── kopi-robusta.jpg
+│   │   │   └── logo.jpg
+│   │   └── js/
+│   │       ├── admin.js
+│   │       ├── login.js
+│   │       └── script.js
+│   ├── admin.html
+│   ├── Dockerfile
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── login.html
+│   └── nginx.conf
+│
+├── .dockerignore
 ├── .gitignore
-└── .dockerignore
+├── docker-compose.yml
+└── README.md
 ```
 
 ---
 
-## Fitur User
+## 7. Service Docker
 
-| Fitur | Keterangan |
-|---|---|
-| Landing page | Menampilkan profil singkat website dan katalog kopi |
-| Katalog produk | Produk diambil dari database |
-| Klik harga produk | Mengarahkan user ke form pemesanan dan memilih produk otomatis |
-| Form pemesanan | User mengisi nama, WhatsApp, produk, jumlah, alamat, metode pembayaran, dan bukti transfer |
-| Validasi form | Mencegah input asal seperti nama tidak valid, nomor WhatsApp salah, alamat terlalu pendek, dan file tidak sesuai |
-| Metode pembayaran | User memilih metode pembayaran yang aktif |
-| Upload bukti transfer | User upload file JPG/PNG maksimal 10 MB |
+Project ini dijalankan menggunakan 3 container utama:
 
----
+| Container | Fungsi | Port |
+|---|---|---|
+| `katalog-kopi-frontend` | Menjalankan frontend menggunakan Nginx | 80 |
+| `katalog-kopi-backend` | Menjalankan backend Express.js | 3000 internal |
+| `katalog-kopi-db` | Menjalankan database MySQL | 3306 internal |
 
-## Fitur Admin
-
-Admin dapat mengakses halaman login:
-
-```text
-http://localhost/login.html
-```
-
-Login admin:
-
-```text
-Username: admin
-Password: admin123
-```
-
-Fitur admin:
-
-| Fitur | Keterangan |
-|---|---|
-| Login admin | Admin harus login sebelum masuk dashboard |
-| Dashboard admin | Tampilan admin sederhana dengan sidebar |
-| Kelola produk | Tambah, edit, hapus, refresh produk |
-| Upload foto produk | Admin dapat upload foto produk JPG/PNG |
-| Kelola metode pembayaran | Tambah, edit, aktif/nonaktif, hapus metode pembayaran |
-| Data pesanan | Melihat pesanan dari user |
-| Bukti transfer | Bukti transfer user dapat dibuka dari admin |
-| Status pembayaran | Admin dapat mengubah status pembayaran |
-| Logout | Admin dapat keluar dari halaman admin |
-
-Catatan: login admin pada project ini dibuat sederhana untuk kebutuhan prototype/tugas kuliah.
+Backend dan database tidak perlu dibuka langsung ke internet karena diakses secara internal oleh Docker network.
 
 ---
 
-## Metode Pembayaran
-
-Metode pembayaran default yang tersedia:
-
-```text
-Transfer Bank: BCA
-No. Rekening: 1234567890
-Atas Nama: Siputra Coffee Beans
-```
-
-Admin dapat menambah metode pembayaran lain melalui dashboard admin. Metode pembayaran yang aktif akan muncul di form pemesanan user.
-
----
-
-## Endpoint Backend
+## 8. Endpoint API
 
 | Method | Endpoint | Fungsi |
 |---|---|---|
 | GET | `/api/health` | Mengecek status backend dan database |
-| GET | `/api/products` | Mengambil data produk |
+| GET | `/api/products` | Mengambil semua produk |
 | POST | `/api/products` | Menambah produk |
 | PUT | `/api/products/:id` | Mengubah produk |
 | DELETE | `/api/products/:id` | Menghapus produk |
-| POST | `/api/upload` | Upload gambar produk |
 | GET | `/api/payment-methods` | Mengambil metode pembayaran aktif |
+| GET | `/api/payment-methods/all` | Mengambil semua metode pembayaran untuk admin |
 | POST | `/api/payment-methods` | Menambah metode pembayaran |
 | PUT | `/api/payment-methods/:id` | Mengubah metode pembayaran |
 | DELETE | `/api/payment-methods/:id` | Menghapus metode pembayaran |
-| POST | `/api/orders` | Menyimpan pesanan dan bukti transfer |
 | GET | `/api/orders` | Mengambil data pesanan |
-| PUT | `/api/orders/:id/payment-status` | Mengubah status pembayaran |
+| POST | `/api/orders` | Menyimpan pesanan dan bukti transfer |
+| PUT/PATCH | `/api/orders/:id/status` | Mengubah status pembayaran |
 | DELETE | `/api/orders/:id` | Menghapus satu pesanan |
 | DELETE | `/api/orders` | Menghapus semua pesanan |
+| POST | `/api/upload` | Upload gambar produk |
 
 ---
 
-## Menjalankan Project di Lokal
+## 9. Cara Menjalankan Project di Laptop Lokal
 
 Pastikan **Docker Desktop** sudah berjalan.
 
@@ -203,7 +220,7 @@ Masuk ke folder project:
 cd "C:\Users\ASUS\Documents\GitHub\tubes-cc"
 ```
 
-Jalankan seluruh service:
+Jalankan project:
 
 ```bash
 docker compose up -d --build
@@ -215,27 +232,19 @@ Cek container:
 docker ps
 ```
 
-Container yang harus berjalan:
-
-```text
-katalog-kopi-frontend
-katalog-kopi-backend
-katalog-kopi-db
-```
-
-Akses website:
+Website user:
 
 ```text
 http://localhost
 ```
 
-Akses login admin:
+Login admin:
 
 ```text
 http://localhost/login.html
 ```
 
-Akses admin page:
+Admin page:
 
 ```text
 http://localhost/admin.html
@@ -250,115 +259,78 @@ http://localhost/api/products
 
 ---
 
-## Testing Lokal
+## 10. Cara Mematikan Project Lokal
 
-### 1. Testing Website User
-
-1. Buka `http://localhost`.
-2. Pastikan katalog produk muncul.
-3. Klik harga produk.
-4. Pastikan halaman langsung menuju form pemesanan.
-5. Pastikan produk otomatis terpilih.
-
-### 2. Testing Form Pemesanan
-
-Contoh data valid:
-
-```text
-Nama: Teguh Pramudya
-WhatsApp: 081234567890
-Produk: Arabika Gayo
-Jumlah: 1
-Alamat: Telkom University
-Metode Pembayaran: Transfer BCA
-Bukti Transfer: file JPG/PNG
+```bash
+docker compose down
 ```
 
-Klik:
+Jangan gunakan command berikut jika tidak ingin menghapus data database lokal:
 
-```text
-Pesan Sekarang
+```bash
+docker compose down -v
 ```
-
-Jika berhasil, pesanan akan masuk ke database dan tampil pada admin page.
-
-### 3. Testing Admin
-
-1. Buka `http://localhost/login.html`.
-2. Login dengan username `admin` dan password `admin123`.
-3. Buka dashboard admin.
-4. Coba tambah/edit/hapus produk.
-5. Coba tambah/edit/hapus metode pembayaran.
-6. Coba lihat data pesanan.
-7. Coba buka bukti transfer.
-8. Coba ubah status pembayaran.
 
 ---
 
-## Deploy ke AWS EC2
+## 11. Cara Push Update ke GitHub
 
-### 1. Buat EC2 Instance
+Cek perubahan:
 
-Gunakan konfigurasi berikut:
+```bash
+git status
+```
 
-| Bagian | Isi |
+Tambahkan semua perubahan:
+
+```bash
+git add -A
+```
+
+Commit:
+
+```bash
+git commit -m "Update final project"
+```
+
+Push:
+
+```bash
+git push -u origin main
+```
+
+---
+
+## 12. Deployment ke AWS EC2
+
+### 12.1 Membuat Instance EC2
+
+Konfigurasi EC2 yang digunakan:
+
+| Bagian | Konfigurasi |
 |---|---|
-| Name | `tubes-cc-katalog-kopi` |
 | AMI | Ubuntu Server 24.04 LTS |
-| Instance Type | `t2.micro` |
-| Key Pair | `vockey` / `labsuser.pem` |
-| Storage | 8 GiB atau lebih |
+| Instance type | t2.micro |
+| Key pair | labsuser.pem / vockey |
+| Storage | 8 GiB |
 | Security Group | SSH dan HTTP |
 
-Inbound rule yang digunakan:
+Inbound rules yang dibutuhkan:
 
-| Type | Port | Source | Fungsi |
-|---|---:|---|---|
-| SSH | 22 | My IP / Anywhere | Login ke server EC2 |
-| HTTP | 80 | Anywhere | Akses website dari browser |
+| Type | Port | Source |
+|---|---:|---|
+| SSH | 22 | My IP / Anywhere |
+| HTTP | 80 | 0.0.0.0/0 |
 
-Tidak perlu membuka port `3000` dan `3306`, karena backend dan database hanya digunakan internal oleh Docker.
-
----
-
-### 2. SSH ke EC2 dari Terminal Laptop
-
-Masuk ke folder tempat file `.pem` berada:
-
-```bash
-cd "C:\Users\ASUS\Downloads"
-```
-
-Atur permission file `.pem`:
-
-```powershell
-icacls "labsuser (1).pem" /inheritance:r
-icacls "labsuser (1).pem" /grant "$($env:USERNAME):(R)"
-```
-
-SSH ke EC2:
-
-```bash
-ssh -i "labsuser (1).pem" ubuntu@PUBLIC-IP-EC2
-```
+### 12.2 SSH ke EC2
 
 Contoh:
 
 ```bash
-ssh -i "labsuser (1).pem" ubuntu@54.87.20.30
+ssh -i "C:\Users\ASUS\Downloads\labsuser (1).pem" ubuntu@PUBLIC-IP-EC2
 ```
 
-Jika berhasil, terminal akan berubah menjadi:
-
-```bash
-ubuntu@ip-172-31-17-213:~$
-```
-
----
-
-### 3. Install Docker dan Git di EC2
-
-Jalankan di terminal EC2:
+### 12.3 Install Docker, Docker Compose, dan Git
 
 ```bash
 sudo apt update
@@ -375,24 +347,14 @@ docker compose version
 git --version
 ```
 
----
-
-### 4. Clone Repository
+### 12.4 Clone Repository
 
 ```bash
 git clone https://github.com/teguhpramudya/tubes-cc.git
 cd tubes-cc
 ```
 
-Cek isi folder:
-
-```bash
-ls
-```
-
----
-
-### 5. Jalankan Project di EC2
+### 12.5 Jalankan Project di EC2
 
 ```bash
 sudo docker compose up -d --build
@@ -404,7 +366,7 @@ Cek container:
 sudo docker ps
 ```
 
-Pastikan muncul:
+Jika berhasil, akan muncul container:
 
 ```text
 katalog-kopi-frontend
@@ -412,28 +374,9 @@ katalog-kopi-backend
 katalog-kopi-db
 ```
 
----
+### 12.6 Akses Website dari Browser
 
-### 6. Cek API di EC2
-
-```bash
-curl http://localhost/api/health
-curl http://localhost/api/products
-```
-
-Hasil health yang diharapkan:
-
-```json
-{"status":"ok","service":"backend","database":"connected"}
-```
-
----
-
-### 7. Buka Website dari Browser
-
-Ganti `PUBLIC-IP-EC2` dengan public IP instance.
-
-Halaman user:
+Website user:
 
 ```text
 http://PUBLIC-IP-EC2
@@ -451,27 +394,13 @@ Admin page:
 http://PUBLIC-IP-EC2/admin.html
 ```
 
-Contoh:
-
-```text
-http://54.87.20.30
-http://54.87.20.30/login.html
-http://54.87.20.30/admin.html
-```
+Catatan: gunakan `http://`, bukan `https://`, karena project belum menggunakan SSL.
 
 ---
 
-## Update Project di AWS Setelah Push GitHub
+## 13. Update Project di AWS Setelah Push GitHub
 
-Jika ada perubahan kode di laptop:
-
-```bash
-git add -A
-git commit -m "Update project"
-git push -u origin main
-```
-
-Lalu update di EC2:
+Masuk ke EC2 melalui SSH, lalu jalankan:
 
 ```bash
 cd ~/tubes-cc
@@ -483,148 +412,210 @@ sudo docker ps
 
 ---
 
-## Command Penting
+## 14. Testing Fitur
 
-### Menjalankan container lokal
+### Testing User
+
+1. Buka `http://localhost`.
+2. Pastikan katalog produk muncul.
+3. Klik harga produk.
+4. Pastikan halaman langsung menuju form pemesanan.
+5. Isi form pemesanan.
+6. Pilih metode pembayaran.
+7. Upload bukti transfer JPG/PNG.
+8. Klik **Pesan Sekarang**.
+9. Pastikan pesanan berhasil dikirim.
+
+### Testing Admin
+
+1. Buka `http://localhost/login.html`.
+2. Login menggunakan:
+   ```text
+   admin / admin123
+   ```
+3. Buka dashboard admin.
+4. Cek data produk.
+5. Tambah, edit, dan hapus produk.
+6. Tambah, edit, dan hapus metode pembayaran.
+7. Cek pesanan yang masuk.
+8. Buka bukti transfer.
+9. Ubah status pembayaran.
+
+---
+
+## 15. Status Pembayaran
+
+Status pembayaran yang dapat digunakan:
+
+```text
+Menunggu Verifikasi
+Sudah Dibayar
+Ditolak
+Dibatalkan
+```
+
+---
+
+## 16. Troubleshooting
+
+### Website AWS tidak bisa dibuka
+
+Pastikan membuka dengan HTTP:
+
+```text
+http://PUBLIC-IP-EC2
+```
+
+Bukan:
+
+```text
+https://PUBLIC-IP-EC2
+```
+
+Pastikan security group membuka port 80:
+
+```text
+HTTP | TCP | 80 | 0.0.0.0/0
+```
+
+### SSH timeout
+
+Kemungkinan penyebab:
+
+1. Public IP berubah.
+2. EC2 belum running.
+3. Security group belum membuka port 22.
+4. AWS Academy lab belum aktif.
+5. Instance masih initializing.
+
+### Docker Compose tidak ditemukan
+
+Gunakan:
+
+```bash
+sudo apt install docker-compose-v2 -y
+```
+
+Jika tidak tersedia, gunakan alternatif:
+
+```bash
+sudo apt install docker-compose -y
+```
+
+### Perubahan tampilan belum muncul
+
+Coba rebuild:
+
+```bash
+docker compose down
+docker compose up -d --build
+```
+
+Lalu tekan:
+
+```text
+Ctrl + F5
+```
+
+atau buka melalui incognito.
+
+### Favicon belum berubah
+
+Browser sering menyimpan cache favicon. Solusi:
+
+1. Tekan `Ctrl + F5`.
+2. Buka incognito.
+3. Hapus cache browser.
+4. Pastikan file berikut ada:
+   ```text
+   frontend/assets/img/favicon.ico
+   frontend/favicon.ico
+   ```
+
+---
+
+## 17. Konsep Cloud Computing yang Diterapkan
+
+| Konsep | Implementasi |
+|---|---|
+| Cloud Computing | Website di-deploy pada AWS EC2 |
+| Public Cloud | Menggunakan layanan AWS Academy |
+| IaaS | Menggunakan EC2 sebagai virtual server |
+| Virtual Machine | Ubuntu Server berjalan sebagai VM di AWS |
+| Containerization | Frontend, backend, dan database berjalan dalam Docker container |
+| Docker Compose | Menjalankan beberapa container dengan satu konfigurasi |
+| 3-Tier Architecture | Frontend, backend, dan database dipisahkan |
+| GitHub | Source code disimpan dan di-update melalui repository |
+| Network Security | Security group mengatur akses SSH dan HTTP |
+
+---
+
+## 18. Bukti Dokumentasi untuk Laporan/Video
+
+Dokumentasi yang perlu disiapkan:
+
+1. Repository GitHub.
+2. Struktur folder project.
+3. Docker Compose berjalan di laptop.
+4. Hasil `docker ps` lokal.
+5. AWS EC2 running.
+6. SSH dari terminal laptop ke EC2.
+7. Instalasi Docker di EC2.
+8. Hasil `sudo docker ps` di EC2.
+9. Hasil `curl http://localhost/api/health`.
+10. Hasil `curl http://localhost/api/products`.
+11. Website user di public IP AWS.
+12. Login admin di public IP AWS.
+13. Admin dashboard.
+14. Fitur tambah/edit/hapus produk.
+15. Fitur tambah/edit/hapus metode pembayaran.
+16. Form pemesanan user.
+17. Upload bukti transfer.
+18. Bukti transfer muncul di admin.
+19. Ubah status pembayaran.
+
+---
+
+## 19. Command Penting
+
+Menjalankan project:
 
 ```bash
 docker compose up -d --build
 ```
 
-### Mematikan container lokal
+Mematikan project:
 
 ```bash
 docker compose down
 ```
 
-### Menjalankan container di EC2
+Melihat container:
 
 ```bash
-sudo docker compose up -d --build
+docker ps
 ```
 
-### Mematikan container di EC2
+Melihat log container:
 
 ```bash
+docker logs nama-container
+```
+
+Update project di EC2:
+
+```bash
+cd ~/tubes-cc
+git pull origin main
 sudo docker compose down
-```
-
-### Reset database
-
-```bash
-docker compose down -v
-docker compose up -d --build
-```
-
-Untuk EC2:
-
-```bash
-sudo docker compose down -v
 sudo docker compose up -d --build
-```
-
-Catatan: command `down -v` akan menghapus data database, termasuk produk tambahan, pesanan, dan metode pembayaran yang ditambahkan melalui admin.
-
-### Melihat log backend
-
-```bash
-docker logs katalog-kopi-backend
-```
-
-Untuk EC2:
-
-```bash
-sudo docker logs katalog-kopi-backend
+sudo docker ps
 ```
 
 ---
 
-## Bukti Dokumentasi
+## 20. Kesimpulan
 
-Screenshot yang dapat digunakan untuk laporan atau video presentasi:
+Project **Siputra Coffee Beans** berhasil dibuat sebagai aplikasi web berbasis 3-tier architecture. Aplikasi memiliki frontend, backend, dan database yang berjalan menggunakan Docker container. Project juga berhasil dihubungkan dengan GitHub dan dapat di-deploy ke AWS EC2.
 
-1. Repository GitHub.
-2. Struktur folder project.
-3. Docker Compose berjalan di laptop.
-4. Hasil `docker ps` di laptop.
-5. EC2 instance running.
-6. SSH ke EC2 dari terminal laptop.
-7. Instalasi Docker di EC2.
-8. Hasil `sudo docker ps` di EC2.
-9. Hasil `curl http://localhost/api/health`.
-10. Hasil `curl http://localhost/api/products`.
-11. Website user dari public IP AWS.
-12. Login admin dari public IP AWS.
-13. Admin page dari public IP AWS.
-14. Fitur tambah/edit/hapus produk.
-15. Fitur tambah/edit/hapus metode pembayaran.
-16. Form pemesanan user.
-17. Upload bukti transfer.
-18. Data pesanan dan bukti transfer tampil di admin.
-19. Ubah status pembayaran.
-
----
-
-## Konsep Komputasi Awan yang Digunakan
-
-### 1. Public Cloud
-
-AWS EC2 digunakan sebagai server cloud yang dapat diakses melalui internet.
-
-### 2. Infrastructure as a Service
-
-AWS EC2 menyediakan virtual machine. Pengguna mengelola sistem operasi, Docker, aplikasi, dan konfigurasi server.
-
-### 3. Virtualisasi
-
-EC2 berjalan di atas infrastruktur virtual milik AWS.
-
-### 4. Containerization
-
-Docker digunakan untuk menjalankan frontend, backend, dan database dalam container terpisah.
-
-### 5. 3-Tier Architecture
-
-Sistem dibagi menjadi frontend, backend, dan database.
-
-### 6. Scalability
-
-Arsitektur ini dapat dikembangkan dengan menaikkan spesifikasi EC2, memisahkan database ke layanan khusus, atau memisahkan frontend, backend, dan database ke server berbeda.
-
----
-
-## Teknologi yang Digunakan
-
-| Teknologi | Fungsi |
-|---|---|
-| HTML | Struktur halaman website |
-| CSS | Styling dan responsive design |
-| JavaScript | Interaksi frontend, validasi form, komunikasi API |
-| Node.js | Runtime backend |
-| Express.js | REST API |
-| Multer | Upload gambar produk dan bukti transfer |
-| MySQL | Database produk, pembayaran, dan pesanan |
-| Nginx | Web server frontend dan reverse proxy API |
-| Docker | Containerization |
-| Docker Compose | Menjalankan beberapa container sekaligus |
-| GitHub | Repository project |
-| AWS EC2 | Cloud server deployment |
-
----
-
-## Anggota Kelompok
-
-| Nama | Tugas |
-|---|---|
-| Teguh Pramudya | Frontend, GitHub, Database, deployment |
-| Naessya | Dokumentasi, database, Docker, pengujian |
-
----
-
-## Kesimpulan
-
-Project **Siputra Coffee Bean** berhasil mengimplementasikan konsep komputasi awan dalam bentuk aplikasi web katalog biji kopi. Website dikembangkan menggunakan arsitektur **3-tier** yang terdiri dari frontend, backend, dan database.
-
-Seluruh komponen dijalankan menggunakan **Docker Compose** dalam satu VM **AWS EC2**. Project juga memiliki fitur admin, pengelolaan metode pembayaran, validasi form, upload bukti transfer, serta tampilan responsive.
-
-Dengan menggunakan Docker, GitHub, dan AWS EC2, proses pengembangan, deployment, dan pengelolaan aplikasi menjadi lebih terstruktur, fleksibel, dan sesuai dengan konsep dasar cloud computing.
+Website ini tidak hanya menampilkan katalog produk, tetapi juga memiliki fitur pemesanan, metode pembayaran, upload bukti transfer, login admin, dashboard admin, serta pengelolaan data produk, pembayaran, dan pesanan.
