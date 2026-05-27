@@ -409,6 +409,7 @@ sudo docker compose down
 sudo docker compose up -d --build
 sudo docker ps
 ```
+>Catatan: Public IPv4 EC2 dapat berubah ketika instance atau AWS Academy Lab dimulai ulang. Jika IP berubah, gunakan IP terbaru dari halaman EC2 Instances.
 
 ---
 
