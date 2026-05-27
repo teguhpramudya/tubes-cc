@@ -11,7 +11,7 @@ body {
   color: #333;
 }
 
-/* Navbar */
+/*navbar*/
 .navbar {
   background-color: #4b2c20;
   padding: 15px 0;
@@ -157,7 +157,7 @@ h2 {
   transform: none !important;
 }
 
-/* Tentang Kami */
+/*tentang kami*/
 .tentang {
   background: #fff7f3;
   padding: 60px 20px;
@@ -173,7 +173,7 @@ h2 {
   line-height: 1.8;
 }
 
-/* Footer */
+/*footer*/
 footer {
   text-align: center;
   padding: 30px;
@@ -522,7 +522,7 @@ button,
   text-align: center;
 }
 
-/* tampilan tablet */
+/*tampilan tablet*/
 @media (max-width: 992px) {
   .hero-content h1 {
     font-size: 3em;
@@ -545,7 +545,7 @@ button,
   }
 }
 
-/* Mobile umum */
+/*mobile umum*/
 @media (max-width: 768px) {
   .navbar {
     gap: 8px;
@@ -634,7 +634,7 @@ button,
     width: 100%;
   }
 
-  /* Admin mobile */
+  /*admin mobile*/
   .admin-header {
     padding: 50px 18px;
   }
@@ -704,7 +704,7 @@ button,
     height: 100px;
   }
 
-  /* tabel admin di hp */
+  /*tabel admin dihp*/
   .admin-table-wrapper {
     overflow-x: visible;
   }
@@ -778,7 +778,7 @@ button,
   }
 }
 
-/* hp kecil */
+/*hp kecil*/
 @media (max-width: 480px) {
   .navbar {
     gap: 6px;
@@ -922,9 +922,7 @@ button,
   }
 }
 
-/* ========================= */
-/* Login Admin Sederhana */
-/* ========================= */
+/*login admin*/
 .login-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f6ede6, #fffaf7);
@@ -994,9 +992,7 @@ button,
   text-decoration: none;
 }
 
-/* ========================= */
-/* Dashboard Admin Simple */
-/* ========================= */
+/*dashboard admin*/
 .admin-page {
   background: #fbf7f3;
 }
@@ -1122,9 +1118,7 @@ button,
   font-size: 14px;
 }
 
-/* ========================= */
-/* Metode Pembayaran dan Bukti Transfer */
-/* ========================= */
+/*metode pembayaran dan bukti tf*/
 .payment-info {
   margin: 20px 0;
   text-align: left;
@@ -1285,11 +1279,7 @@ button,
   #pesanan-admin .admin-table td:nth-child(11)::before { content: 'Aksi'; }
 }
 
-
-/* =========================================================
-   PESAN VALIDASI FORM PEMESANAN
-   ========================================================= */
-
+/*pesan validasi form pesan*/
 .form-message {
   width: 100%;
   margin: 18px 0;
@@ -1317,12 +1307,6 @@ button,
   cursor: not-allowed;
 }
 
-
-/* =========================================================
-   SIDEBAR ADMIN ICON - COKLAT, KREM, PUTIH
-   ========================================================= */
-
-/* Matikan warna bawaan emoji/icon lama dan pakai SVG currentColor */
 .admin-sidebar {
   width: 76px;
   min-height: 100vh;
@@ -1399,12 +1383,11 @@ button,
   box-shadow: 0 9px 20px rgba(90, 50, 31, 0.25);
 }
 
-/* Pastikan konten admin tetap bergeser dari sidebar */
 .admin-dashboard {
   margin-left: 76px;
 }
 
-/* Responsive sidebar */
+/*responsive sidebar*/
 @media (max-width: 768px) {
   .admin-sidebar {
     width: 100%;
@@ -1444,11 +1427,6 @@ button,
   }
 }
 
-
-/* =========================================================
-   SELECT STATUS ADMIN - DESAIN COKLAT KREM
-   ========================================================= */
-
 #payment-active,
 #pembayaran-admin select,
 .admin-field select,
@@ -1467,8 +1445,6 @@ button,
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(75, 44, 32, 0.04);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-
-  /* custom arrow */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1504,7 +1480,6 @@ button,
   background-color: #fffdfb;
 }
 
-/* Hilangkan warna default select saat browser memberi autofill/focus */
 #payment-active option,
 #pembayaran-admin select option,
 .admin-field select option,
@@ -1513,12 +1488,10 @@ button,
   color: #3a2419;
 }
 
-/* Khusus kolom status agar tingginya sejajar dengan input sebelahnya */
 #pembayaran-admin .admin-field:has(#payment-active) {
   align-self: start;
 }
 
-/* Fallback jika browser tidak support :has() */
 .payment-status-field {
   align-self: start;
 }
@@ -1535,5 +1508,64 @@ button,
       calc(100% - 14px) 21px,
       calc(100% - 40px) 12px;
   }
+}
+
+
+/*logo admin sidebar, favicon*/
+.admin-brand-logo {
+  width: 52px;
+  height: 52px;
+  margin: 0 0 26px;
+  padding: 0;
+  border-radius: 16px;
+  background: #fff7f0;
+  border: 1px solid #e2c4b0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(75, 44, 32, 0.12);
+  text-decoration: none;
+}
+
+.admin-logo-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.admin-brand-logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(90, 50, 31, 0.18);
+}
+
+@media (max-width: 768px) {
+  .admin-brand-logo {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    border-radius: 14px;
+    flex: 0 0 auto;
+  }
+}
+
+.admin-brand-logo {
+  transition: all 0.22s ease;
+}
+
+.admin-logo-img {
+  transition: transform 0.22s ease;
+}
+
+.admin-brand-logo:hover {
+  background: #5a321f;
+  border-color: #5a321f;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 18px rgba(90, 50, 31, 0.22);
+}
+
+.admin-brand-logo:hover .admin-logo-img {
+  transform: scale(1.08) rotate(-4deg);
 }
 
