@@ -140,9 +140,6 @@ tubes-cc/
 ├── database/
 │   └── init.sql
 │
-├── docs/
-│   └── HANDS_ON.md
-│
 ├── frontend/
 │   ├── assets/
 │   │   ├── css/
